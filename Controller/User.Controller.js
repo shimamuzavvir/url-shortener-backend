@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import shortid from 'shortid'
 import User from '../Models/User.Schema.js'
 import { sendMail } from '../Services/SendMail.js'
+import { nanoid } from 'nanoid'
 
 
 dotenv.config()
@@ -192,7 +193,7 @@ export const RegisterUser = async (req, res) => {
       return res.status(403).json({message:"user not found"})
     }
 
-    const shortUrl = shortid.generate()
+    const shortUrl = nanoid()
 
     user.urls.push(longUrl, shortUrl)
 
