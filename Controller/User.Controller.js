@@ -1,7 +1,6 @@
 import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import shortid from 'shortid'
 import User from '../Models/User.Schema.js'
 import { sendMail } from '../Services/SendMail.js'
 import { nanoid } from 'nanoid'
