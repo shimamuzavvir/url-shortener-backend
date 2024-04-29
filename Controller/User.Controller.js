@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import User from '../Models/User.Schema.js'
 import { sendMail } from '../Services/SendMail.js'
-import { nanoid } from 'nanoid'
+import shortid from 'shortid'
 
 
 dotenv.config()
@@ -191,10 +191,10 @@ export const RegisterUser = async (req, res) => {
     if(!user){
       return res.status(403).json({message:"user not found"})
     }
+    const shortUrl = shortid.generate()
 
-    const shortUrl = nanoid()
+    user.urls.push({longUrl, shortUrl});
 
-    user.urls.push(longUrl, shortUrl)
 
     await user.save()
 
@@ -203,7 +203,7 @@ export const RegisterUser = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.status(500).json({error:"internal server error"})
+    res.status(500).json({message:"error on url"})
   }
  }
 
