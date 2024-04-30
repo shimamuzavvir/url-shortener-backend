@@ -15,7 +15,7 @@ const authMiddleware = async(req, res, next)=>{
         req.user = decoded
         const user = await User.findById(req.user._id);
 
-        if (user.role != "admin") {
+        if (user.role !== "admin") {
             return res.status(401).json({ message: "Access Denied.User is not an admin" });
         }
         next();
